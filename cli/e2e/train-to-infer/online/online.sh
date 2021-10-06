@@ -2,11 +2,12 @@
 
 sep="######################"
 
+ext=$(az extension show -n ml --query version -o tsv)
 group=$(az config get defaults.group  --query value -o tsv)
 workspace=$(az config get defaults.workspace  --query value -o tsv)
 
 
-echo "$sep Starting this scenario with default resource group : $group , and workspace : $workspace"
+echo "$sep Starting this scenario with default resource group: $group , and workspace: $workspace, and  ml extension version: $ext"
 
 
 #Comment out and create compute name "cpu-cluster" if it does not exists already
