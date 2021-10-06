@@ -7,7 +7,7 @@ group=$(az config get defaults.group  --query value -o tsv)
 workspace=$(az config get defaults.workspace  --query value -o tsv)
 
 
-echo "$sep Starting this scenario with default resource group: $group , and workspace: $workspace, and  ml extension version: $ext"
+echo "$sep Starting this scenario with default resource group: $group , workspace: $workspace, and  ml extension version: $ext"
 
 
 #Comment out and create compute name "cpu-cluster" if it does not exists already
@@ -15,7 +15,7 @@ echo "$sep Starting this scenario with default resource group: $group , and work
 
 
 echo "$sep Creating the training job "
-run_id=$(az ml job create -f jobs/scikit-learn/iris/job.yml --query name -o tsv)
+run_id=$(az ml job create -f jobs/scikit-learn/iris/job.yml --web --query name -o tsv)
 
 
 echo "$sep Checking status of the job with run id $run_id, press ^Ctrl+C to come out "
