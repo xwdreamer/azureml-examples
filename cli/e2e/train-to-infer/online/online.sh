@@ -1,8 +1,8 @@
-#Create compute if it does not exists already
-az ml compute create -n cpu-cluster --type amlcompute
+#Comment out and create compute name "cpu-cluster" if it does not exists already
+#az ml compute create -n cpu-cluster --type amlcompute
 
 #Submit the training job , get the run id
-run_id=$(az ml job create -f jobs/single-step/scikit-learn/iris/job.yml --query name -o tsv)
+run_id=$(az ml job create -f jobs/scikit-learn/iris/job.yml --query name -o tsv)
 
 echo "Using run id : $run_id"
 
@@ -11,7 +11,7 @@ status=$(az ml job show -n $run_id --query status -o tsv)
 running=("Queued" "Starting" "Preparing" "Running" "Finalizing")
 while [[ ${running[*]} =~ $status ]]
 do
-  sleep 8 
+  sleep 8
   status=$(az ml job show -n $run_id --query status -o tsv)
   echo $status
 done
@@ -31,10 +31,10 @@ echo "Using endpoint name : $ENDPOINT_NAME"
 #Create an online endpoint
 az ml online-endpoint create --name $ENDPOINT_NAME
 
-# create a deployment, 
+# create a deployment,
 az ml online-deployment create --name blue --endpoint $ENDPOINT_NAME -f blue-deployment.yml --all-traffic
 
 
-az ml online-endpoint invoke --name $ENDPOINT_NAME --request-file endpoints/online/model-1/sample-request.json
+az ml online-endpoint invoke --name $ENDPOINT_NAME --request-file sample-request.json
 
 az ml online-endpoint delete --name $ENDPOINT_NAME -y
