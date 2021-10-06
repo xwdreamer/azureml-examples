@@ -1,9 +1,17 @@
+#!/bin/bash -e
+
+sep="######################"
+
+group=$(az config get defaults.group  --query value -o tsv)
+workspace=$(az config get defaults.workspace  --query value -o tsv)
+
+
+echo "$sep Starting this scenario with default resource group : $group , and workspace : $workspace"
 
 
 #Comment out and create compute name "cpu-cluster" if it does not exists already
 #az ml compute create -n cpu-cluster --type amlcompute
 
-sep="######################"
 
 echo "$sep Creating the training job "
 run_id=$(az ml job create -f jobs/scikit-learn/iris/job.yml --query name -o tsv)
