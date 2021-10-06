@@ -1,13 +1,16 @@
+
+
 #Comment out and create compute name "cpu-cluster" if it does not exists already
 #az ml compute create -n cpu-cluster --type amlcompute
 
-#Submit the training job , get the run id
+echo "Creainge the training job "
 run_id=$(az ml job create -f jobs/scikit-learn/iris/job.yml --query name -o tsv)
 
-echo "Using run id : $run_id"
 
-#wait until job finishes
+echo " Checking status of the job with run id $run_id, press ^Ctrl+C to come out "
 status=$(az ml job show -n $run_id --query status -o tsv)
+
+
 running=("Queued" "Starting" "Preparing" "Running" "Finalizing")
 while [[ ${running[*]} =~ $status ]]
 do
@@ -16,25 +19,28 @@ do
   echo $status
 done
 
-#Download job logs including model, into the current path , a path create with the run id
+
+echo " Download job logs including model, into the current path with  $run_id path name "
 az ml job download -n $run_id
 
 #Copy the model into the model path for deployment to pick it up.
+
+echo " Copying model to model folder path "
 
 cp $run_id/model/model.pkl ./model/model.pkl
 
 #Generate endpoint name randomly
 export ENDPOINT_NAME=endpt-`echo $RANDOM`
 
-echo "Using endpoint name : $ENDPOINT_NAME"
 
-#Create an online endpoint
+echo " Creating endpoint $ENDPOINT_NAME "
 az ml online-endpoint create --name $ENDPOINT_NAME
 
-# create a deployment,
+echo " Creating deployment "
 az ml online-deployment create --name blue --endpoint $ENDPOINT_NAME -f blue-deployment.yml --all-traffic
 
-
+echo " Invoking endpoint "
 az ml online-endpoint invoke --name $ENDPOINT_NAME --request-file sample-request.json
 
+echo " Deleting endpoint "
 az ml online-endpoint delete --name $ENDPOINT_NAME -y
