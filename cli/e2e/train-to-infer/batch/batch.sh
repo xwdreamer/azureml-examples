@@ -39,7 +39,7 @@ az ml job download -n $run_id
 
 
 echo "$sep Copying model to model folder path "
-cp $run_id/model/model.pth ./model/model.pth
+cp $run_id/outputs/model.pth ./model/model.pth
 
 #Generate endpoint name randomly
 export ENDPOINT_NAME=endpt-`echo $RANDOM`
@@ -48,7 +48,7 @@ echo "Create batch endpoint"
 az ml batch-endpoint create -n $ENDPOINT_NAME
 
 echo "Create deployment"
-az ml batch-deployment create -f blue-deployment.yml -n red -e $ENDPOINT_NAME --set-default
+az ml batch-deployment create -f inference.yml -n red -e $ENDPOINT_NAME --set-default
 
 
 echo "Create a dataset from the local directory with scoring images"
