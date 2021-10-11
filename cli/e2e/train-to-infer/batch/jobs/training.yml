@@ -1,0 +1,7 @@
+code:
+  local_path: "./"
+command: python train.py 
+environment: azureml:AzureML-pytorch-1.8-ubuntu18.04-py37-cuda11-gpu:6
+compute: azureml:gpu-cluster
+outputs:
+  output_path:
