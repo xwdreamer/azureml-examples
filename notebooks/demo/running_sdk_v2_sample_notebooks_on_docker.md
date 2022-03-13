@@ -10,16 +10,17 @@ Verify docker desktop is running with "Linux container" mode
 
 ![Switch to this](linux_container_mode.jpg "docker desktop properties")
 
+
 Open command prompt/powershell
 
-clone the repo wih the branch e2e-demo
+clone the repo wih the branch banide/e2e-demo
 
 ```
 git clone https://github.com/Azure/azureml-examples.git -b banide/e2e-demo
 ```
 
 
-Go inside this folder and run docker build on [this docker file](dockerbuild\sdk_test_ubuntu.dockerfile)
+Go inside notebooks/demo/dockerbuild folder and run docker build
 
 
 ```

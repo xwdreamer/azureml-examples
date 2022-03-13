@@ -17,7 +17,6 @@ RUN conda init bash
 RUN echo "pip install azure-cli" | bash
 #Choose your version of ml cli
 RUN echo "az extension add -n ml" | bash 
-RUN echo "pip install azure-ml==0.0.139 --extra-index-url https://azuremlsdktestpypi.azureedge.net/sdk-cli-v2" | bash
 
 
 RUN pip install jupyterlab && jupyter notebook --generate-config
