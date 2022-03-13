@@ -12,11 +12,18 @@ Verify docker desktop is running with "Linux container" mode
 
 Open command prompt/powershell
 
-Get the full content of this [dockerbuild folder](dockerbuild)
+clone the repo wih the branch e2e-demo
+
+```
+git clone https://github.com/Azure/azureml-examples.git -b banide/e2e-demo
+```
+
 
 Go inside this folder and run docker build on [this docker file](dockerbuild\sdk_test_ubuntu.dockerfile)
+
+
 ```
-cd dockerbuild
+cd azureml-examples/notebooks/demo/dockerbuild
 docker build --pull --rm -f "sdk_test_ubuntu.dockerfile" -t sdkv2-samples:latest "." 
 ```
 
@@ -30,3 +37,4 @@ Run this command in the container:
 ```
 bash .start_jupyter.sh
 ```
+Open browser on : [http://localhost:8888/lab](http://localhost:8888/lab)
