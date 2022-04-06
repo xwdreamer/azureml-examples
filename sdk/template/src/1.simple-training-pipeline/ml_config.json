@@ -1,0 +1,23 @@
+{
+    "workspace_settings":
+    {
+        "subscription_id": "ee85ed72-2b26-48f6-a0e8-cb5bcf98fbd9",
+        "resource_group": "pipeline-pm",
+        "workspace": "prod"
+    },
+    "run_settings":
+    {
+        "compute_name": "cpu-cluster",
+        "experiment_name": "pipeline_with_dsl_components"
+    },
+    "pipeline_inputs":
+    {
+        "input_data": "./sample-data/nyc-taxi-data.csv",
+        "feature_list": "distance,dropoff_latitude,dropoff_longitude,passengers,pickup_latitude,pickup_longitude,store_forward,vendor,pickup_weekday,pickup_month,pickup_monthday,pickup_hour,pickup_minute,pickup_second,dropoff_weekday,dropoff_month,dropoff_monthday,dropoff_hour,dropoff_minute,dropoff_second",
+        "label_col": "cost",
+        "learning_rate": 0.3,
+        "n_estimators": 100,
+        "test_size": 0.3,
+        "random_state": 42
+    }
+}
